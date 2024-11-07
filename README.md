@@ -58,7 +58,7 @@ AuthDemo实现了登录和权限认证
 }
 ```
 
-<font style="color:rgb(17, 17, 17);">上面代码中，</font>`<font style="color:rgb(17, 17, 17);">alg</font>`<font style="color:rgb(17, 17, 17);">属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）；</font>`<font style="color:rgb(17, 17, 17);">typ</font>`<font style="color:rgb(17, 17, 17);">属性表示这个令牌（token）的类型（type），JWT 令牌统一写为</font>`<font style="color:rgb(17, 17, 17);">JWT</font>`<font style="color:rgb(17, 17, 17);">。</font>
+<font style="color:rgb(17, 17, 17);">上面代码中，</font>`alg`<font style="color:rgb(17, 17, 17);">属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）；</font>`typ`<font style="color:rgb(17, 17, 17);">属性表示这个令牌（token）的类型（type），JWT 令牌统一写为</font>`JWT`<font style="color:rgb(17, 17, 17);">。</font>
 
 <font style="color:rgb(17, 17, 17);">最后，将上面的 JSON 对象使用 Base64URL 算法（详见后文）转成字符串。</font>
 
@@ -101,7 +101,7 @@ HMACSHA256(
     secret)
 ```
 
-<font style="color:rgb(17, 17, 17);">算出签名以后，把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用"点"（</font>`<font style="color:rgb(17, 17, 17);">.</font>`<font style="color:rgb(17, 17, 17);">）分隔，就可以返回给用户。</font>
+<font style="color:rgb(17, 17, 17);">算出签名以后，把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用"点"（</font>`.`<font style="color:rgb(17, 17, 17);">）分隔，就可以返回给用户。</font>
 
 #### <font style="color:rgb(44, 62, 80);">实现真实从数据库获取系统用户信息</font>
 实现UserDetailsService
@@ -963,3 +963,6 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 }
 ```
 
+### over！
+
+### 现在就可以写前端，写controller层啦，快去实践吧！
