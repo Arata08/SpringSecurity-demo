@@ -2,6 +2,10 @@
 
 数据库chen密码为123456
 
+demo模块为SpringSecurity的基本实现，可使用控制台输出的密码登录访问
+
+AuthDemo实现了登录和权限认证
+
 ## <font style="color:rgb(44, 62, 80);">web登陆流程</font>
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/47353919/1730712627825-b4ca40c7-efe5-4884-862f-8b7551112142.png)
