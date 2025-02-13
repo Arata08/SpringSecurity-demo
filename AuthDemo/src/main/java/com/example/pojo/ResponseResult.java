@@ -1,8 +1,9 @@
 package com.example.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
-
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult<T> {
     /**
@@ -18,6 +19,12 @@ public class ResponseResult<T> {
      */
     private T data;
 
+    public ResponseResult(Integer code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
     public ResponseResult(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
@@ -28,33 +35,22 @@ public class ResponseResult<T> {
         this.data = data;
     }
 
-    public Integer getCode() {
-        return code;
+    public ResponseResult(ResultCode resultCode) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMessage();
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
+    public ResponseResult(ResultCode resultCode, T data) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMessage();
         this.data = data;
     }
 
-    public ResponseResult(Integer code, String msg, T data) {
-        this.code = code;
-        this.msg = msg;
-        this.data = data;
+    public static ResponseResult error() {
+        return new ResponseResult(ResultCode.ERROR);
+    }
+
+    public static ResponseResult success() {
+        return new ResponseResult(ResultCode.OK);
     }
 }

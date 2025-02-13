@@ -49,6 +49,18 @@ public class JwtUtil {
         return builder.compact();
     }
 
+    /**
+     * 创建token
+     * @param id 唯一标识
+     * @param subject token中要存放的数据（json格式）
+     * @param ttlMillis token超时时间
+     * @return String
+     */
+    public String createJWT(String id, String subject, Long ttlMillis) {
+        JwtBuilder builder = getJwtBuilder(subject, ttlMillis, id); // 设置过期时间
+        return builder.compact();
+    }
+
     private JwtBuilder getJwtBuilder(String subject, Long ttlMillis, String uuid) {
         System.out.println(subject);
         long nowMillis = System.currentTimeMillis();
@@ -66,17 +78,6 @@ public class JwtUtil {
                 .expiration(expDate);
     }
 
-    /**
-     * 创建token
-     * @param id 唯一标识
-     * @param subject token中要存放的数据（json格式）
-     * @param ttlMillis token超时时间
-     * @return String
-     */
-    public String createJWT(String id, String subject, Long ttlMillis) {
-        JwtBuilder builder = getJwtBuilder(subject, ttlMillis, id); // 设置过期时间
-        return builder.compact();
-    }
 
     /**
      * 生成加密后的秘钥 secretKey

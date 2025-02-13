@@ -3,6 +3,7 @@ package com.example.service.impl;
 import com.example.mapper.SysUserMapper;
 import com.example.pojo.LoginUser;
 import com.example.pojo.ResponseResult;
+import com.example.pojo.ResultCode;
 import com.example.pojo.User;
 import com.example.service.LoginService;
 import com.example.util.JwtUtil;
@@ -62,11 +63,15 @@ public class LoginServiceImpl implements LoginService {
             //5系统用户相关所有信息放入redis
             redisCache.setCacheObject("login:"+userId,loginUser);
 
-            return new ResponseResult(200,"登陆成功",map);
+            return new ResponseResult(ResultCode.OK,map);
         } catch (AuthenticationException e) {
             // 处理认证失败的情况
-            log.info(user.getUserName() + " 登陆失败: " + e.getMessage());
-            return new ResponseResult(200,e.getMessage(),null);
+            log.info(user.getUserName() + e.getMessage());
+            return new ResponseResult(ResultCode.ERROR, " 登陆失败: " + e.getMessage());
+        } catch (Exception e) {
+            // 处理其他异常
+            log.warning(user.getUserName() + e.getMessage());
+            return new ResponseResult(ResultCode.ERROR, " 登陆失败: " + e.getMessage());
         }
     }
 
@@ -77,7 +82,7 @@ public class LoginServiceImpl implements LoginService {
         Long userId = loginUser.getUser().getId();
         redisCache.deleteObject("login:" + userId);
 
-        return new ResponseResult(200,"退出成功！");
+        return ResponseResult.success();
     }
 
     @Override
@@ -85,6 +90,6 @@ public class LoginServiceImpl implements LoginService {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         SysUserMapper.insert(user);
-        return new ResponseResult(200,"注册成功！");
+        return ResponseResult.success();
     }
 }
